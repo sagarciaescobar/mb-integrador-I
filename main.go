@@ -1,7 +1,9 @@
 package main
 
-import "github.com/sagarciaescobar/mb-integrador-I/internal/tickets"
+import loadData "github.com/sagarciaescobar/mb-integrador-I/internal"
 
 func main() {
-	total, err := tickets.GetTotalTickets("Brazil")
+	//	total, err := tickets.GetTotalTickets("Brazil")
+	loadData.TicketData()
+
 }
