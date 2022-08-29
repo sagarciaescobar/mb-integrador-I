@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Ticket struct {
@@ -13,7 +14,7 @@ type Ticket struct {
 	Name    string
 	Email   string
 	Country string
-	Time    string
+	Time    time.Duration
 	Flight  string
 }
 
@@ -35,7 +36,9 @@ func TicketData() ([]Ticket, error) {
 		if i < len(dataSlice)-1 {
 			var dato []string = strings.Split(v, ",")
 			id, _ := strconv.ParseInt(dato[0], 10, 64)
-			ticket := Ticket{Id: id, Name: dato[1], Email: dato[2], Country: dato[3], Time: dato[4], Flight: dato[5]}
+			var timeData []string = strings.Split(dato[4], ":")
+			hour, _ := time.ParseDuration(timeData[0] + "h" + timeData[1] + "m")
+			ticket := Ticket{Id: id, Name: dato[1], Email: dato[2], Country: dato[3], Time: hour, Flight: dato[5]}
 			formatedData = append(formatedData, ticket)
 		}
 	}
